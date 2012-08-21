@@ -116,11 +116,23 @@ Firefox, Commad+Shift+F pod Chrome, powinno być też w menu widok). Po
 kliknięciu w dowolne zdjęcie włączy się podgląd skalowany do wielkości okna
 przeglądarki. Przewijać można myszką albo strzałkami na klawiaturze.
 </p>
+<p>
+Menu u góry pozwala wybrać format zdjęć. Im bardziej w prawo, tym większa
+jakość, ale też tym większy plik do ściągnięcia. Domyślnie, automatycznie
+wybrany jest największy format jaki w całości zmieści się w oknie. Po
+wyborze większego, będzie on pokazywany przeskalowany do wielkości okna.
+</p>
 <hr>
 <p>
 I suggest making your browser full screen (F11 under Firefox, Command+Shift+F
 under Chrome, or search in view menu). After clicking a photo you'll see a
 viewer scaled to the window size. Use mouse or arrow keys to scroll.
+</p>
+<p>
+Menu on the top allows you to choose image format. The more right, the bigger
+format and bigger file to download. By default, it is automatically set to the
+biggest one that fully fits in the window. If you choose a bigger one, it will
+be scaled down to fill the window.
 </p>
 <div class="gallery">
 '''
