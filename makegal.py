@@ -97,7 +97,18 @@ function popUp(URL) {
 </head>
 <body>
 <header>
-<h1> %(title)s </h1>
+    <nav>
+        <ul>
+            <li>Format:</li>
+            <li><a href="#">320p</a></li>
+            <li><a href="#">480p</a></li>
+            <li class="active"><a href="#">720p</a></li>
+            <li><a href="#">1080p</a></li>
+            <li><a href="#">Full</a></li>
+        </ul>
+    </nav>
+  
+    <h1> %(title)s </h1>
 </header>
 <p>
 Sugeruję na dobry początek włączyć przeglądarkę na pełny ekran (klawisz F11 pod

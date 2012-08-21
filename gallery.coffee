@@ -9,6 +9,8 @@ adapt_resolution = () ->
     format = "#{ok[1]}p"
     JQ("div.thumb a").attr("href", (index, oldv) -> 
         "#{format}/#{oldv.split(/\//)[1]}")
+    JQ("nav li.active").removeClass("active")
+    JQ("nav li:contains('#{format}')").addClass("active")
 
 JQ -> 
     adapt_resolution()
