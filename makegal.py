@@ -12,6 +12,7 @@ def get_args():
     add('path', help="path to the images directory")
     add('--copy', help="copy the images and prepare gallery in this path")
     add('--title', help="Alternative title, default is `dirname`")
+    add('--html', help="HTML only (don't scale images)", action='store_true')
     return parser.parse_args()
 
 def main(args):
@@ -21,7 +22,8 @@ def main(args):
     else:
         os.chdir(args.path)
     images = glob.glob("*.jpg")
-    make_thumbs(images)
+    if not args.html:
+        make_thumbs(images)
     if args.title:
         title = args.title
     else:
