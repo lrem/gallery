@@ -26,3 +26,12 @@ JQ ->
     adapt_resolution()
     arm_selector()
     JQ(window).resize(adapt_resolution)
+    JQ('#help').each((index, bq) ->
+        JQ(bq).before('<a class="toggle" href="#">
+            Kliknij aby pokazać pomoc / Click to show help</a>')
+        JQ(bq).hide()
+    )
+    JQ('.toggle').click((ev) ->
+        $(ev.target).next().toggle()
+        ev.preventDefault()
+    )

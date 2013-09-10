@@ -34,7 +34,7 @@ hr {
     background-color: #ddd;
 }
 
-p {
+p, a.toggle {
     padding: 0 36px 0 36px;
 }
 

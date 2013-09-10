@@ -33,7 +33,7 @@ def main(args):
         title = os.path.basename(os.path.abspath(os.path.curdir))
     desc = ''
     if os.path.exists(args.desc):
-        desc = '<div id="desc">' + open(args.desc).read() + '</div>'
+        desc = '<div id="desc"><p>' + open(args.desc).read() + '</p></div>'
     make_index(images, title, desc, 'index.html')
 
 
