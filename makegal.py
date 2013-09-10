@@ -14,6 +14,7 @@ def get_args():
     add('--copy', help="copy the images and prepare gallery in this path")
     add('--title', help="Alternative title, default is `dirname`")
     add('--html', help="HTML only (don't scale images)", action='store_true')
+    add('--desc', help="gallery description file", default="desc.txt")
     return parser.parse_args()
 
 
@@ -30,7 +31,10 @@ def main(args):
         title = args.title
     else:
         title = os.path.basename(os.path.abspath(os.path.curdir))
-    make_index(images, title, 'index.html')
+    desc = ''
+    if os.path.exists(args.desc):
+        desc = '<div id="desc">' + open(args.desc).read() + '</div>'
+    make_index(images, title, desc, 'index.html')
 
 
 def make_thumbs(images):
@@ -53,9 +57,9 @@ def make_thumbs(images):
                        os.path.join(name, image)))
 
 
-def make_index(images, title, fname):
+def make_index(images, title, desc, fname):
     index = open(fname, 'w')
-    print >>index, HEAD % {'title': title}
+    print >>index, HEAD % {'title': title, 'desc': desc}
     for image in images:
         print >>index, IMAGE % {'file': image, 'caption': image}
     print >>index, TAIL
@@ -113,6 +117,8 @@ function popUp(URL) {
 
     <h1> %(title)s </h1>
 </header>
+%(desc)s
+<div id="help">
 <p>
 Sugeruję na dobry początek włączyć przeglądarkę na pełny ekran (klawisz F11 pod
 Firefox, Commad+Shift+F pod Chrome, powinno być też w menu widok). Po
@@ -137,6 +143,7 @@ format and bigger file to download. By default, it is automatically set to the
 biggest one that fully fits in the window. If you choose a bigger one, it will
 be scaled down to fill the window.
 </p>
+</div>
 <div class="gallery">
 '''
 
