@@ -6,14 +6,16 @@ import glob
 import time
 import argparse
 
+
 def get_args():
-    parser = argparse.ArgumentParser(description = __doc__)
+    parser = argparse.ArgumentParser(description=__doc__)
     add = parser.add_argument
     add('path', help="path to the images directory")
     add('--copy', help="copy the images and prepare gallery in this path")
     add('--title', help="Alternative title, default is `dirname`")
     add('--html', help="HTML only (don't scale images)", action='store_true')
     return parser.parse_args()
+
 
 def main(args):
     if args.copy:
@@ -30,6 +32,7 @@ def main(args):
         title = os.path.basename(os.path.abspath(os.path.curdir))
     make_index(images, title, 'index.html')
 
+
 def make_thumbs(images):
     try:
         os.mkdir('thumbs')
@@ -40,14 +43,14 @@ def make_thumbs(images):
         try:
             os.mkdir(name)
         except:
-            pass # Let's assume that the user really meant not aborting :>
+            pass  # Let's assume that the user really meant not aborting :>
     for image in images:
-        os.system("convert -resize 240x160 '%s' '%s'" % 
-            (image, 'thumbs/' + image))
+        os.system("convert -resize 240x160 '%s' '%s'" %
+                  (image, 'thumbs/' + image))
         for name in FORMATS:
-            os.system("convert -resize %sx%s '%s' '%s'" % 
-                (FORMATS[name][0], FORMATS[name][1], image, 
-                    os.path.join(name, image)))
+            os.system("convert -resize %sx%s '%s' '%s'" %
+                      (FORMATS[name][0], FORMATS[name][1], image,
+                       os.path.join(name, image)))
 
 
 def make_index(images, title, fname):
@@ -58,11 +61,11 @@ def make_index(images, title, fname):
     print >>index, TAIL
 
 FORMATS = {
-        '320p': (480, 320),
-        '480p': (720, 480),
-        '720p': (1280, 720),
-        '1080p': (1920,1080),
-        }
+    '320p': (480, 320),
+    '480p': (720, 480),
+    '720p': (1280, 720),
+    '1080p': (1920, 1080)
+}
 
 HEAD = '''
 <!DOCTYPE html>
@@ -71,7 +74,7 @@ HEAD = '''
     <meta charset="UTF-8">
     <title> %(title)s </title>
     <link href="/gallery.css" type="text/css" rel="stylesheet">
-    
+
     <!--
         <script src="/js/jquery-1.7.2.min.js"></script>
         <script src="/js/lightbox.js"></script>
@@ -87,13 +90,13 @@ HEAD = '''
     <link rel="stylesheet" href="/css/lightboxHTHcustCap2b.css" type="text/css" />
 <script language="JavaScript" type="text/javascript">
 function popUp(URL) {
-	day = new Date();
-	id = day.getTime();
-	eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=0,scrollbars=0,location=0,statusbar=0,copyhistory=no,menubar=0,resizable=1,width='+screen.availWidth*.8+',height='+screen.availHeight*.8+',top = 10');");
+    day = new Date();
+    id = day.getTime();
+    eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=0,scrollbars=0,location=0,statusbar=0,copyhistory=no,menubar=0,resizable=1,width='+screen.availWidth*.8+',height='+screen.availHeight*.8+',top = 10');");
 }
 </script>
 
-    
+
 </head>
 <body>
 <header>
@@ -107,7 +110,7 @@ function popUp(URL) {
             <li><a href="#">Full</a></li>
         </ul>
     </nav>
-  
+
     <h1> %(title)s </h1>
 </header>
 <p>
