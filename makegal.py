@@ -26,10 +26,12 @@ def main(args):
     assert not (args.copy or args.title) and args.desc == "desc.txt", \
         "Can't override defaults when recursive"
     args.html = True
+    topdir = os.getcwd()
     for dirpath, dirnames, filenames in os.walk(args.path):
         if 'index.html' in filenames and 'gallery.js' in \
            open(os.path.join(dirpath, 'index.html')).read():
             single(args, dirpath)
+            os.chdir(topdir)
 
 
 def single(args, path=None):
