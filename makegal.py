@@ -15,15 +15,31 @@ def get_args():
     add('--title', help="Alternative title, default is `dirname`")
     add('--html', help="HTML only (don't scale images)", action='store_true')
     add('--desc', help="gallery description file", default="desc.txt")
+    add('-R',  help="recursively regenerate HTML in the tree pointed by path",
+        action='store_true')
     return parser.parse_args()
 
 
 def main(args):
+    if not args.R:
+        return single(args)
+    assert not (args.copy or args.title) and args.desc == "desc.txt", \
+        "Can't override defaults when recursive"
+    args.html = True
+    for dirpath, dirnames, filenames in os.walk(args.path):
+        if 'index.html' in filenames and 'gallery.js' in \
+           open(os.path.join(dirpath, 'index.html')).read():
+            single(args, dirpath)
+
+
+def single(args, path=None):
+    if path is None:
+        path = args.path
     if args.copy:
-        os.system("cp -a '%s' '%s'" % (args.path, args.copy))
+        os.system("cp -a '%s' '%s'" % (path, args.copy))
         os.chdir(args.copy)
     else:
-        os.chdir(args.path)
+        os.chdir(path)
     images = glob.glob("*.jpg")
     if not args.html:
         make_thumbs(images)
