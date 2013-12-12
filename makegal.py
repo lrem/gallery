@@ -42,7 +42,7 @@ def single(args, path=None):
         os.chdir(args.copy)
     else:
         os.chdir(path)
-    images = glob.glob("*.jpg")
+    images = sorted(glob.glob("*.jpg"))
     if not args.html:
         make_thumbs(images)
     if args.title:
